@@ -2,5 +2,5 @@ import XCTest
 @testable import CollectionViewKitTests
 
 XCTMain([
-     testCase(CollectionViewKitTests.allTests),
+     testCase(CollectionViewKitTests.allTests)
 ])

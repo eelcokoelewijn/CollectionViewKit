@@ -8,10 +8,9 @@ class CollectionViewKitTests: XCTestCase {
         XCTAssertEqual(CollectionViewKit().text, "Hello, World!")
     }
 
-
-    static var allTests : [(String, (CollectionViewKitTests) -> () throws -> Void)] {
+    static var allTests: [(String, (CollectionViewKitTests) -> () throws -> Void)] {
         return [
-            ("testExample", testExample),
+            ("testExample", testExample)
         ]
     }
 }

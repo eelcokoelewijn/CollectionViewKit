@@ -9,12 +9,12 @@ public protocol SectionInfo {
 public struct Section<T: Equatable>: SectionInfo {
     public let title: String
     public var rows: [T]
-    
+
     public init(title: String, rows: T...) {
         self.rows = rows
         self.title = title
     }
-    
+
     public subscript (index: Int) -> T {
         get {
             return rows[index]
@@ -26,7 +26,7 @@ public struct Section<T: Equatable>: SectionInfo {
 }
 
 extension Section: Equatable {
-    public static func ==<T>(lhs: Section<T>, rhs: Section<T>) -> Bool {
+    public static func == <T>(lhs: Section<T>, rhs: Section<T>) -> Bool {
         return lhs.title == rhs.title &&
             lhs.rows == rhs.rows
     }
