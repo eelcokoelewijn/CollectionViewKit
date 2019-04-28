@@ -1,6 +1,7 @@
 import XCTest
-@testable import CollectionViewKitTests
 
-XCTMain([
-     testCase(CollectionViewKitTests.allTests)
-])
+import CollectionViewKitTests
+
+var tests = [XCTestCaseEntry]()
+tests += CollectionViewKitTests.allTests()
+XCTMain(tests)

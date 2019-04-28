@@ -25,7 +25,7 @@ public class SectionDataHandler<T: SectionInfo>: DataHandler {
     
     public func index(forItem item: T.RowType) -> IndexPath? {
         for (index, element) in data.enumerated() {
-            guard let rowIndex = element.rows.index(where: { (row: T.RowType) -> Bool in
+            guard let rowIndex = element.rows.firstIndex(where: { (row: T.RowType) -> Bool in
                 row == item
             }) else {
                 continue
@@ -50,7 +50,7 @@ public class SectionDataHandler<T: SectionInfo>: DataHandler {
     }
     
     public func add(item: T.RowType, section: T) {
-        guard let index = data.index(of: section) else { return }
+        guard let index = data.firstIndex(of: section) else { return }
         data[index].rows.append(item)
     }
     

@@ -8,7 +8,7 @@ public protocol Reusable {
 }
 
 public extension Reusable {
-    public static var reuseIdentifier: String {
+    static var reuseIdentifier: String {
         return String(describing: Self.self)
     }
 }
@@ -16,14 +16,14 @@ public extension Reusable {
 // MARK: Collection view extensions
 
 public extension UICollectionView {
-    public func dequeueReusableCell<C: Reusable>(at indexPath: IndexPath) -> C {
+    func dequeueReusableCell<C: Reusable>(at indexPath: IndexPath) -> C {
         guard let cell = self.dequeueReusableCell(withReuseIdentifier: C.reuseIdentifier, for: indexPath) as? C else {
             fatalError("Could not cast to correct type")
         }
         return cell
     }
 
-    public func registerReusableCell<C: UICollectionViewCell>(_: C.Type) where C: Reusable {
+    func registerReusableCell<C: UICollectionViewCell>(_: C.Type) where C: Reusable {
         self.register(C.self, forCellWithReuseIdentifier: C.reuseIdentifier)
     }
 }
