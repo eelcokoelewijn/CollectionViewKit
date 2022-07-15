@@ -1,15 +1,16 @@
-import XCTest
 @testable import CollectionViewKit
+import XCTest
 
 final class CollectionViewKitTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(Section<String>(title: "Planets").title, "Hello, World!")
+    func testSection() {
+        let subject = Section(title: "Planets", rows: ["Earth", "Moon"])
+        XCTAssertEqual(subject.title, "Planets")
+        XCTAssertEqual(subject.rows.count, 2)
     }
 
-    static var allTests = [
-        ("testExample", testExample),
-    ]
+    func testIndex() {
+        let subject = Index(row: 1, section: 5)
+        XCTAssertEqual(subject.row, 1)
+        XCTAssertEqual(subject.section, 5)
+    }
 }

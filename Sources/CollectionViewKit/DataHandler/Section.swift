@@ -9,15 +9,15 @@ public protocol SectionInfo: Equatable {
 public struct Section<T: Equatable>: SectionInfo {
     public let title: String
     public var rows: [T]
-    
+
     public init(title: String, rows: [T] = []) {
         self.rows = rows
         self.title = title
     }
-    
-    public subscript (index: Int) -> T {
+
+    public subscript(index: Int) -> T {
         get {
-            return rows[index]
+            rows[index]
         }
         set {
             rows[index] = newValue

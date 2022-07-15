@@ -2,15 +2,15 @@ import Foundation
 
 public class SectionDataHandler<T: SectionInfo>: DataHandler {
     public var data: [T]
-    
+
     public init(data: [T]) {
         self.data = data
     }
-    
+
     public convenience init() {
         self.init(data: [T]())
     }
-    
+
     public func numberOfItems(inSection section: Int) -> Int {
         let totalSections = numberOfSections()
         guard section < totalSections else {
@@ -18,65 +18,67 @@ public class SectionDataHandler<T: SectionInfo>: DataHandler {
         }
         return data[section].rows.count
     }
-    
+
     public func numberOfSections() -> Int {
-        return data.count
+        data.count
     }
-    
-    public func index(forItem item: T.RowType) -> IndexPath? {
+
+    public func index(forItem item: T.RowType) -> Index? {
         for (index, element) in data.enumerated() {
-            guard let rowIndex = element.rows.firstIndex(where: { (row: T.RowType) -> Bool in
-                row == item
-            }) else {
+            guard
+                let rowIndex = element.rows.firstIndex(where: { (row: T.RowType) -> Bool in
+                    row == item
+                })
+            else {
                 continue
             }
-            return IndexPath(row: rowIndex, section: index)
+            return Index(row: rowIndex, section: index)
         }
         return nil
     }
-    
-    public func item(at index: IndexPath) -> T.RowType {
+
+    public func item(at index: Index) -> T.RowType {
         guard index.row < data[index.section].rows.count else {
             fatalError("Index \(index.row) is out of range \(data[index.section].rows.count)")
         }
         return data[index.section].rows[index.row]
     }
-    
-    public func add(item: T.RowType, at index: IndexPath) {
+
+    public func add(item: T.RowType, at index: Index) {
         guard index.row < data[index.section].rows.count else {
             fatalError("Index \(index.row) is out of range \(data[index.section].rows.count)")
         }
         data[index.section].rows.insert(item, at: index.row)
     }
-    
+
     public func add(item: T.RowType, section: T) {
         guard let index = data.firstIndex(of: section) else { return }
         data[index].rows.append(item)
     }
-    
-    public func remove(item: T.RowType, at index: IndexPath) {
+
+    public func remove(item: T.RowType, at index: Index) {
         data[index.section].rows.remove(at: index.row)
     }
-    
+
     public func add(item: T) {
         data.append(item)
     }
-    
+
     public subscript(index: Int) -> T {
         get {
-            return data[index]
+            data[index]
         }
         set {
             data[index] = newValue
         }
     }
-    
-    public subscript(indexPath: IndexPath) -> T.RowType {
+
+    public subscript(index: Index) -> T.RowType {
         get {
-            return data[indexPath.section].rows[indexPath.row]
+            data[index.section].rows[index.row]
         }
         set {
-            data[indexPath.section].rows[indexPath.row] = newValue
+            data[index.section].rows[index.row] = newValue
         }
     }
 }
